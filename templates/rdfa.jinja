@@ -1,0 +1,154 @@
+{# vi:ft=jinja: #}
+{%- macro geoloc(g) -%}
+{%- if g -%}
+<span rel="geo:location" class="geo">
+    (<span datatype="xsd:decimal" property="geo:lat"
+           class="latitude">{{g.lat}}</span>;
+     <span datatype="xsd:decimal" property="geo:long"
+           class="longitude">{{g.lon}}</span>)
+</span>
+{%-endif-%}
+{%-endmacro-%}
+{%- macro address(a) -%}
+{%-if a-%}
+<span class="adr">
+    {%- if a.street -%}<span class="street-address">{{a.street}}</span>{%-endif-%}
+    {%- if a.pc -%}, <span class="postal-code">{{a.pc}}</span>{%-endif-%}
+    {%- if a.city -%}, <span class="locality">{{a.city}}</span>{%-endif-%}
+    {%- if a.country -%}, <span class="country-name">{{a.country}}</span>{%-endif-%}
+</span>
+{%-endif-%}
+{%-endmacro-%}
+{%-macro dtdate(rel,date,fmtd, fmth=None)-%}
+<time property="cal:dt{{rel}}" class="dt{{rel}}" datatype="xsd:date" 
+      content="{{date|date("%FT%T")}}" datetime="{{date|date("%FT%T")}}">{{date|date(fmtd,fmth)}}</time>
+{%-endmacro-%}
+{%-macro vcard(p)-%}
+<div class="vcard">
+    {%-if p.img-%}
+    <img src="{{p.img|url}}" alt="{{p.gname}} {{p.fname}}" />
+    {%-endif-%}
+    <span class="label fn">
+    {%-if p.page-%}
+        <a class="url" title="Page de {{p.gname}} {{p.fname}}"
+           href="{{p.page}}">{{p.gname}} {{p.fname}}</a>
+    {%-else-%}{{p.gname}} {{p.fname}}{%-endif-%}
+    </span>
+    {%- if p.org-%}<span class="org">{{p.org}}</span>{%-endif-%}
+    {%- if p.title-%}{%if p.org%}, {%endif%}
+    <span class="title">{{p.title}}</span>{%-endif-%}
+    {%- if p.city or p.country-%}{%if p.org%}, {%endif%}
+
+    <div class="adr">
+    {%if p.city%}<span class="locality">{{p.city}}</span>{%if p.country%}, {%endif%}{%endif%}
+    {%if p.country%}<span class="country-name">{{p.country}}</span>{%endif%}
+    </div>
+    {%-endif-%}
+</div>
+{%-endmacro-%}
+{%-macro daterange(e, year=False, with_date=True)%}
+{%- if lang.startswith("fr") -%}
+{{daterange_fr(e, year, with_date)}}
+{%-else-%}
+{{daterange_en(e, year, with_date)}}
+{%-endif-%}
+{%-endmacro-%}
+{%-macro daterange_fr(e, year=False, with_date=True)-%}
+{%if e%}
+    <span class="event-dates">
+    {%if e.end%}
+        {%if e.end is same_day (e.start)%}
+            le {{dtdate('start',e.start,"%d %b de %Hh%M")}}
+            à {{dtdate('end',e.end, "%Hh%M")}}
+        {%elif e.end is same_month (e.start)%}
+            du {{dtdate('start',e.start,"%d","%d %b à %Hh%M")}}
+            au {{dtdate('end',e.end,"%d %b","%d %b à %Hh%M")}}
+        {%else%}
+            du {{dtdate('start',e.start,"%d %b","%d %b à %Hh%M")}}
+            au {{dtdate('end',e.end,"%d %b","%d %b à %Hh%M")}}
+        {%endif%}
+    {%else%}
+        le {{dtdate('start',e.start,"%d %b","%d %b à %Hh%M")}}
+    {%endif%}
+    </span>
+{%endif%}
+{%-endmacro-%}
+{%-macro daterange_en(e, year=False, with_date=True)-%}
+{%if e%}
+<span class="event-dates">
+    {%if e.end%}
+        {%if e.end is same_day (e.start)%}
+            {%-if with_date-%}
+            {{dtdate('start',e.start,"%B %o from %Hh%M")}}
+            {%-else-%}
+            {{dtdate('start',e.start,"%Hh%M")}}
+            {%-endif%}
+            to {{dtdate('end',e.end, "%Hh%M")}}
+        {%elif e.end is same_month (e.start)%}
+            from {{dtdate('start',e.start,"%B %o","%B %o %Hh%M")}}
+            to {{dtdate('end',e.end,"%o","%o %Hh%M")}}
+        {%else%}
+            from {{dtdate('start',e.start,"%B %o","%B %o %Hh%M")}}
+            to {{dtdate('end',e.end,"%B %o","%B %o %Hh%M")}}
+        {%endif%}
+    {%else%}
+        {{dtdate('start',e.start,"%B %o","%B %o at %Hh%M")}}
+    {%endif%}
+    </span>
+{%endif%}
+{%-endmacro-%}
+{%-macro simple_daterange(e)-%}
+{%if e%}
+<span class="event-dates">
+    {%if e.end%}
+        {%if e.end is same_day (e.start)%}
+            {%-if with_date-%}
+            {{dtdate('start',e.start,"%B %o %Hh%M")}}
+            {%-else-%}
+            {{dtdate('start',e.start,"%Hh%M")}}
+            {%-endif-%}–{{dtdate('end',e.end, "%Hh%M")}}
+        {%elif e.end is same_month (e.start)%}
+            {{dtdate('start',e.start,"%d","%B %o %Hh%M")}}–{{dtdate('end',e.end,"%d %B","%o %Hh%M")}}
+        {%else%}
+            {{dtdate('start',e.start,"%B %o","%B %o %Hh%M")}}–{{dtdate('end',e.end,"%B %o","%B %o %Hh%M")}}
+        {%endif%}
+    {%else%}
+        {{dtdate('start',e.start,"%B %o","%B %o %Hh%M")}}
+    {%endif%}
+    </span>
+{%endif%}
+{%-endmacro-%}
+{%-macro vevent(e,prefix='', with_date=True)-%}
+    <li typeof="cal:Vevent" class="vevent {{e.cat | join(" ")}}">
+    {%if e.link%}
+        <a property="cal:summary" class="summary url" rel="cal:url"
+           href="{{e.link}}">{{e.title}}</a> :
+    {%else%}
+        <span property="cal:summary" class="summary">{{e.title}}</span> :
+    {%endif%}
+    {{daterange(e, with_date=with_date)}}
+    {%if e.place%}
+        <div property="cal:location" class="location">{{e.place}}</div>
+    {%endif%}
+    {{format_event_desc(e)}}
+    </li>
+{%-endmacro-%}
+{%-macro format_event_desc(e)-%}
+{%if e.desc%}
+<div property="cal:description" class="description">
+{%-if e.papers-%}
+    Chair: {{e.chair}}
+    <ul>
+    {%-for a in e.papers-%}
+    <li class="paper">
+    <span class="title">{{a.title}}</span>:
+    <span class="authors">{{a.authors|join(", ")}}</span>
+    </li>
+    {%-endfor-%}
+    </ul>
+{%-else-%}
+    {{e.desc}}
+{%-endif-%}
+</div>
+{%endif%}
+{%-endmacro-%}

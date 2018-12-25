@@ -1,0 +1,12 @@
+---
+- title: Inscriptions ouvertes
+  id: registration
+  start: 2018-01-23
+  end: 2018-03-10
+  cat: [main]
+
+- title: Cantalpinisme 2018 
+  id: mainevent
+  start: 2018-03-10
+  end: 2018-03-11
+  cat: [main]

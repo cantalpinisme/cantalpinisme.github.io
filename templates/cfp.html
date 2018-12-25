@@ -1,0 +1,50 @@
+{# vim:ft=jinja #}
+{%-set page_title = "Call for lightning talks abstracts"-%}
+{%-set current_page = "cfp"-%}
+{% extends "page-xhtmlrdfa.jinja" %}
+{%block content%}
+{%call markdown()%}
+
+
+## Scope and Areas ##
+
+- Polystores
+- Big Data application
+- Modern data management
+- Scaling cloud to Big Data
+
+{%endcall%}
+
+<h2>Important Dates</h2>
+{{fmtdates.dates(dates,"articles")}}
+
+{%call markdown()%}
+## Paper Submission and Publication
+
+Continuing the tradition of previous XLDB events, XLDB 2017 will feature lightning talks (allocated
+five-minute per talk presented sequentially without interruption). There
+will be two lightning talk sessions, one per day, each of which will be
+followed by a 90-minutes poster session. Speakers are welcome (but not
+required) to prepare a poster. Speakers will be expected to attend the
+poster session to answer follow-up questions regardless.
+
+## Information for Participants ##
+
+If you are interested in giving a lightning talk, please submit an
+abstract with less than 500 words (1 page in pdf format):
+
+**[CLICK HERE TO SUBMIT](https://easychair.org/conferences/?conf=xldb2017)**
+
+Submission second round, deadline for September 10, 2017.
+
+Poster-only submissions are also welcome.
+
+Please note we will only consider non-sales talks/posters, highly relevant
+to managing and analyzing extremely large data sets.
+
+The talks will be selected by the XLDB-2017 scientific committee and
+announced on this website by July 30, 2017.
+
+{%endcall%}
+
+{%endblock%}

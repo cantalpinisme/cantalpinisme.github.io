@@ -1,0 +1,44 @@
+/*==== Landscape mode tablet specific styles ====*/
+
+$left-bar-size: 0.2;
+$footer-height: 2.5em;
+
+@media (min-width: 50em) and (orientation: landscape){
+
+    body {
+        background-color: $colors-background-dark;
+    }
+
+    #skip {
+        a[rel=toc] {
+            display: none;
+        }
+    }
+
+    #nav {
+        position: absolute;
+        width: percentage($left-bar-size);
+        top: 0;
+        height: auto;
+        padding-bottom: $footer-height;
+        a {font-size: 120%;}
+    }
+
+    main, #header, #infobar {
+        margin-left: percentage($left-bar-size);
+    }
+
+    #infobar {
+        margin-bottom: $footer-height;
+    }
+
+    #footer {
+        position: fixed;
+        z-index: 1100;
+        bottom: 0;
+        width: 100%;
+        text-align: right;
+        p { margin: 0 .5em ;}
+    }
+
+}

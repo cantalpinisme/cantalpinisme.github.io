@@ -1,0 +1,147 @@
+{# vim:ft=jinja #}
+{%-set page_title = "Programme"-%}
+{%-set current_page = "program"-%}
+{% extends "page-xhtmlrdfa.jinja" %}
+{%block content%}
+{#
+<aside>
+<a class="callink" rel="alternate" type="{{mediatypes.ics}}"
+   href="{{pages.calendar|url}}">iCalendar version</a>
+</aside>
+#}
+
+{%call markdown()%}
+
+## Mise en garde
+
+Ce rassemblement est en partie destiné aux débutants et notre volonté demeure de
+coller au maximum avec la réalité; c’est pourquoi nous recommandons aux
+participants d’avoir un minimum de condition physique (une pratique régulière de
+la randonnée est suffisante). Les ateliers de la face nord du Bataillouse sans
+être durs techniquement n’en demeurent pas moins physiques.
+Enfin, nous tenons à promouvoir le massif du Cantal, souvent méconnu du grand
+public et néanmoins surprenant pour son potentiel en période hivernale.
+L’édition 2017 de Cantal Y Cimes s’est déroulée en mars dernier sur le
+site du Bataillouse et dans sa face Nord. Grace à une météo et des conditions
+presque parfaites nous avons pu proposer à nos 60 participants divers ateliers
+tels que la goulotte de glace, les couloirs de neige, les recherches de victimes
+en avalanche, etc…
+
+## Samedi 10 mars 2018
+
+* 8 heures :
+    - Collation
+    - Validation inscriptions
+    - Emargement
+
+* 9 heures :
+    - Test DVA
+    - Départ pour télésiège de Rombière à Fond d'Alagnon
+    - Ateliers
+
+* 16h30 :
+    - Fin des ateliers
+    - Retour
+    - Emargement au magasin J'Sports de Fond d'Alagnon
+
+* 19h30 : Repas
+
+* 20h30 - 21h00 : Intervention Sécurité par le PGM de Murat
+
+* A partir de 21h00 : Vidéos
+    - Raid à skis d'AME en Italie
+    - Bureau des guides d'Auvergne
+    - Ski dans les Carpates par Zsolt Ostian
+    - Traversée de la Meije
+
+## Dimanche 11 mars 2018
+
+* 8 heures :
+    - Validation inscriptions
+    - Emargement
+
+* 9 heures :
+    - Test DVA
+    - Départ pour télésiège de Rombière à Fond d'Alagnon
+    - Ateliers
+
+* 15h15 :
+    - Fin des ateliers
+    - Retour
+    - Emargement au magasin J'Sports de Fond d'Alagnon
+
+* 16h00 :
+    - Collation
+    - Récompenses
+
+* 17h00 : FIN
+
+## Ateliers 
+
+Les participants sont accueillis sur de multiples ateliers (cascade de glace,
+dry tooling, recherche arva, ski alpinisme…) encadrés une équipe de bénévoles
+expérimentés et par des Guides de Haute Montagne.
+
+Par le biais de ces ateliers nous voulons amener les participants à l’autonomie
+en les sensibilisant aux techniques de progression couramment utilisées en
+alpinisme. Les itinéraires et cascades de glace proposées sont sécurisés, de
+manière à ce que les personnes puissent grimper avec l’aide et les conseils des
+encadrants.
+
+Au delà de l’initiation nous souhaitons également proposer un perfectionnement
+aux grimpeurs alpinistes et skieurs réguliers. Cela s’exprime par des ateliers
+plus pointus en ski ou escalade sur glace.
+
+Depuis 2013 cet évènement se déroule sur deux jours.
+  Nous avons intégré en 2013 un atelier ski alpinisme avec des membres du club
+“Lioran ski alpinisme”
+Nous proposons une soirée conviviale le samedi soir au chalet des Galinottes à
+Super Lioran. Ceci est l’occasion d’échanger avec les acteurs locaux mais aussi
+d’autres venus d’ailleurs. En 2013, l’Alpiniste Manu Ibarra présentait son livre
+« Glaces, arts expérience et techniques ».
+
+Pour 2018 nous désirons ouvrir notre évènement à un plus grand public. Il
+sera ainsi proposé de la raquette à neige pour aborder la montagne de manière
+plus douce en percevant les enjeux et limites de cette pratique.
+
+L’encadrement sera assuré par les bénévoles du club organisateur Aurillac
+Montagne Escalade , et les Guides de Haute Montagne du Bureau des guides
+d’Auvergne
+
+
+Les principaux ateliers sont:
+
+* Initiation au cramponnage 
+
+* Mixte 
+
+* Recherche de DVA, secours après avalanche 
+
+* Goulotte 
+
+* Raquette 
+
+* Initiation à l'orientation 
+
+* Randonnée glaciaire 
+
+* Ski de randonnée
+
+
+{%endcall%}
+
+{#
+<div class="vcalendar">
+  <div rel="cal:component" class="component">
+  {%for day, events in dates|expand_events(keynotes, papers, pages)|groupevents("schedule")-%}
+  <h2>{{day|date("%b. %o")}}</h2>
+    <ul>
+    {%for event in events-%}
+        {{rdfa.vevent(event, 'XLDB2017', False)}}
+    {%-endfor%}
+    </ul>
+  {%-endfor%}
+  </div>
+</div>
+#}
+{%endblock%}

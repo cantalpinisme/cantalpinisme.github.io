@@ -1,0 +1,42 @@
+/*=== Main Header ===*/
+#logo {
+    float: left;
+    height: 2.5em;
+    margin-left: 1em;
+}
+
+
+#header {
+    @extend %content-block;
+    padding: {
+        right: 1em;
+        left: 0;
+        bottom: .2em;
+    }
+    text-align: right;
+    background-color: $colors-background-medium;
+    border-bottom: $content-block-border;
+    color: $colors-text-light;
+
+    h1 {
+        font: {
+            size: 120%;
+            weight: bold;
+        }
+    }
+    h2 {
+        font: {
+            size: 80%;
+            style: italic;
+            weight: bold;
+        }
+    }
+    .infos {
+        font: {
+            weight: bold;
+            size: 70%;
+        }
+        .geo { display: none; }
+    }
+
+}

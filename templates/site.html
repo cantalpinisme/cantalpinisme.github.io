@@ -1,0 +1,37 @@
+{# vim:ft=jinja #}
+{%-set page_title = "Site"-%}
+{%-set current_page = "site"-%}
+{%-set scripts = [site.scripts.jquery,
+                  site.scripts.layers,
+                  site.scripts.osm,
+                  site.scripts.map]%}
+{% extends "page-xhtmlrdfa.jinja" %}
+{%block content%}
+
+{%call markdown()%}
+
+**Cantalpinisme 2018 aura lieu le 10, 11 mars dans le massif du Cantal, le rendez-vous est
+fixé à 8 heures du matin au Chalet des Galinottes, Le Lioran, Massif du Cantal,
+FRANCE**
+
+<div class="hidden" id="map"> </div>
+
+Nous vous attendons nombreux pour cette huitième édition de Cantalpinisme. Le
+RDV se fera comme les années précédentes au chalet des Galinottes sur le domaine
+de la Station Super-Lioran. Nous vous y accueillerons à partir de 8h pour que
+vous puissiez rapidement vous rendre sur les différents sites.
+
+> Deux Parking gratuits sont disponibles, un devant le Chalet des Galinottes,
+> pour l'inscription, et un à fond d'Alagnon pour accéder aux ateliers.
+
+## Sites de pratique 
+
+### Face nord du Bataillouze
+
+<img width="100%" src="{{"img/sommet-bataillouze.jpg" | url}}" alt="Sommet du Bataillouze" />
+
+<img width="100%" src="{{"img/goulotte.jpg" | url}}" alt="Goulotte" />
+
+{%endcall%}
+
+{%endblock%}

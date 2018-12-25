@@ -1,0 +1,21 @@
+/*=== Global and top-level styles ===*/
+body {
+    background-color: $colors-background-xlight;
+    font-family: "Open Sans","Helvetica",Arial;;
+}
+
+em { font-style: italic;}
+strong { font-weight: bold;}
+
+.hidden { display: none; }
+
+h1, h2, h3, h4, h5, h6 { display: block;}
+
+.alert {
+    display: block;
+    border: thin solid red;
+    background-color: rgb(255,200,200);
+    margin: .5em 0 1em 0;
+    padding: 1em .5em;
+    text-align: center;
+}

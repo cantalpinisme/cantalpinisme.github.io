@@ -1,0 +1,97 @@
+@media print {
+@import "reset.scss";
+@import "lib.scss";
+@import "rdfa.scss";
+
+nav { display: none; }
+#infobar {display: none;}
+footer {display: none; }
+
+
+html, body {
+    font: {
+        family: serif;
+        size: 11pt;
+    }
+    color: black;
+    background-color: white;
+}
+
+header {
+    display: block;
+    border: thin solid black;
+    margin: 0 {
+        bottom: 2em;
+    }
+    height: .8 * 5em;
+    padding: 1em .5em;
+    text-align: center;
+
+    .geo {
+        font-size: 80%;
+        padding: 0 1em;
+        &:before { content: "GPS :" }
+    }
+
+    h1 {
+        font-weight: bold;
+    }
+    h2, .infos {
+        font-size: 80%;
+    }
+}
+
+#logo {
+    float: left;
+    height: 100%;
+    margin-left: 1em;
+}
+
+main {
+    h1 {
+        display: block;
+        margin: 1em 0 2em 0;
+        text-align: center;
+        font: {
+            size: 140%;
+            weight: bold;
+            family: sans;
+        }
+    }
+
+    h2 {
+        display: block;
+        margin: 2em 0 1em 0;
+        font: {
+            size: 120%;
+            weight: bold;
+            family: sans;
+        }
+    }
+
+    h3 {
+        display: block;
+        margin: 1em 0;
+        font: {
+            size: 110%;
+            style: italic;
+            family: sans;
+        }
+    }
+
+    p {
+        text-align: justify;
+        @include hyphenate;
+        margin: 1em 0;
+    }
+
+    a[href^="http"]:after {
+        font-size: 80%;
+        @include hyphenate(none);
+        content: " [" attr(href) "] ";
+    }
+
+    .vcard a.url[href^="http"]:after { content: none; }
+}
+
+}

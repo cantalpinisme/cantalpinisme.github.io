@@ -1,0 +1,183 @@
+{%-import 'rdfa.jinja' as rdfa with context-%}
+{%-import 'navigation.jinja' as nav with context-%}
+{%-import 'news.jinja' as fmtnews with context-%}
+{%-import 'dates.jinja' as fmtdates with context-%}
+{%-import 'comites.jinja' as com with context-%}
+{%-macro markdown()-%}{{caller()|mkd}}{%-endmacro-%}
+{%-set lang=site.language-%}
+{%-set previous_page = navigation.sequence | prev_page(pages, current_page) -%}
+{%-set following_page = navigation.sequence | next_page(pages, current_page) -%}
+<!DOCTYPE html>
+<html prefix="
+    xsd:http://www.w3.org/2001/XMLSchema#
+    foaf:http://xmlns.com/foaf/0.1/
+    con:http://www.w3.org/2000/10/swap/pim/contact#
+    dc:http://purl.org/dc/terms/
+    xhv:http://www.w3.org/1999/xhtml/vocab#
+    dct:http://purl.org/dc/dcmitype/
+    cal:http://www.w3.org/2002/12/cal/icaltzd#
+    geo:http://www.w3.org/2003/01/geo/wgs84_pos#"
+    {%if lang%}
+    lang="{{lang}}"
+    {%endif%}
+    >
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+    <!-- schema and profiles -->
+    <link rel="profile" href="http://microformats.org/profile/hcard"/>
+    <link rel="profile" href="http://microformats.org/profile/hreview"/>
+
+    <!-- metadata -->
+    <meta name="Author" content="{{site.author.name}}" />
+    <link rel="dc:creator" title="author" href="mailto:{{site.author.email}}"/>
+    <meta name="Keywords" content="{{site.keywords|join('; ')}}" />
+
+    <title property="dc:title">{{page_title}} - {{site.title}}</title>
+
+    <meta property="dc:description" name="description" content="{{site.desc|striptags}}" />
+
+    {#
+    <meta property="dc:modified" name="DC.date" content="{{now}}"/>
+    {%if lang%}
+    <meta property="dc:language" name="DC.language" content="{{lang}}"/>
+    {%endif%}
+    {%if site.geo%}
+    <meta name="geo.position"  content="{{site.geo.lat}};{{site.geo.lon}}"/>
+    {%endif%}
+    #}
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-101508986-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+
+    <!-- nav links -->
+    <link rel="start" title="Home" href="{{pages.home|url}}" />
+
+    <link rel="prev" href="{{previous_page|url}}"
+          title="Previous Page"/>
+    <link rel="next" href="{{following_page|url}}"
+          title="Next Page"/>
+    <link rel="bookmark" title="Navigation" href="#nav"/>
+    <link rel="bookmark contents" title="Main content" href="#content"/>
+    <link rel="bookmark" title="Information" href="#infobar"/>
+
+    <!-- other links -->
+    <link rel="alternate" type="{{mediatypes.atom}}" href="{{pages.feed|url}}"
+          title="{{site.title}} feed (Atom)"/>
+    <link rel="alternate" type="{{mediatypes.ics}}" href="{{pages.calendar|url}}"
+          title="{{site.title}} events (iCalendar)"/>
+
+    {%if site.favicon%}
+    <link id="favicon" rel="shortcut icon" href="{{site.favicon|url}}" />
+    {%endif%}
+
+    {%for ss in site.stylesheets%}
+    <link rel="stylesheet" type="{{mediatypes.css}}"
+            {%if ss.media%}media="{{ss.media}}"{%endif%}
+            href="{{ss.uri|url}}" />
+    {%endfor%}
+
+    {%block head%}
+    {%endblock%}
+    </head>
+<body>
+
+{{nav.skipbar("skip",pages,previous_page,following_page)}}
+
+<header id="header" role="banner" class="vevent {{["b0","b1","b2","b3","b4","b5"]|random}}" typeof="cal:Vevent">
+    <a href="{{pages.home|url}}" rel="cal:uri">
+    <img id="logo" title="Logo" alt="Logo" src="{{site.logo|url}}"/>
+    </a>
+    <h1 property="cal:summary" class="label summary">{{site.title}}</h1>
+
+    <h2 property="cal:description" class="description">{{site.desc}}</h2>
+
+    <div class="infos">
+        {{rdfa.simple_daterange(site)}}|
+        <span property="cal:location" class="location">{{site.location}}</span>
+        {{rdfa.geoloc(site.geo)}}
+    </div>
+
+</header>
+
+<main role="main" id="content">
+    <h1>{{page_title}}</h1>
+{%block content%}{%endblock%}
+</main>
+
+<aside id="infobar" role="complementary">
+
+<section class="infobar-elt">
+{%if sponsors%}
+<h1>Partners</h1>
+<ul class="sponsors">
+    {%for sponsor in sponsors%}
+    <li class="sponsor {{sponsor.class|default("")}}">
+        <a href="{{sponsor.website}}" title="{{sponsor.name}}" rel="nofollow">
+        {%-if sponsor.logo%}
+            <img src="{{sponsor.logo|url}}" alt="{{sponsor.name}}"/>
+        {%-else-%}{{sponsor.name}}{%-endif-%}
+        </a>
+    </li>
+    {%endfor%}
+</ul>
+{%endif%}
+</section>
+
+
+<section class="infobar-elt">
+    <h1>
+        <a class="callink" rel="alternate" type="{{mediatypes.ics}}"
+            title="iCal for {{site.title}}"
+            href="{{pages.calendar|url}}">iCalendar</a> 
+        <a href="{{pages.dates|url}}">Main Dates</a>
+    </h1>
+
+{{fmtdates.dates(dates,'main')}}
+</section>
+
+<section class="infobar-elt">
+<h1>
+    <a class="feedlink" rel="alternate" type="{{mediatypes.atom}}"
+        title="{{site.title}} feed"
+        href="{{pages.feed|url}}">Feed</a> 
+    <a href="{{pages.news|url}}">Latest News</a>
+</h1>
+
+{{fmtnews.news(news,3)}}
+
+</section>
+</aside>
+
+<nav id="nav" role="navigation"><h1>Navigation</h1>
+{{nav.navigation(navigation.menu, pages)}}
+</nav>
+
+
+<footer id="footer">
+    <p>
+    <a href="mailto:{{site.contact}}">Contact</a>&#160;|&#160;
+    <a rel="alternate" type="{{mediatypes.atom}}"
+    href="{{pages.feed|url}}">Feed</a>&#160;|&#160;
+    <a href="{{pages.credits|url}}">Legal Info &amp; Credits</a>&#160;|&#160;
+    Last Update: {{today}} &#160;|&#160; © 2017 Limos
+    </p>
+</footer>
+<!-- ============================================================ -->
+{%for s in scripts%}
+<script type="application/javascript" src="{{s|url}}"> </script>
+{%endfor%}
+</body>
+</html>
+{# vim:ft=htmljinja: #}

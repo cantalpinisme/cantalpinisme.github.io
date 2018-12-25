@@ -1,0 +1,34 @@
+---
+menu:
+    - name: Accueil 
+      page: home
+      rel:
+        - start
+        - home
+    - name: News
+      page: news
+    - name: Programme
+      page: program
+    - name: Inscription
+      page: register
+    - name: Accès et Sites
+      page: site
+    - name: Infos pratiques
+      page: info
+    - name: Comité
+      page: comites
+    - name: A propos
+      page: aboutxldb
+
+sequence:
+    - aboutxldb
+    - home
+    - news
+    - dates
+    - register
+    - program
+    - site
+    - info
+    - comites
+    - credits
+

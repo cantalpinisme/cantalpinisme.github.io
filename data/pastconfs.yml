@@ -1,0 +1,41 @@
+---
+- date: 2016
+  place: SLAC, Menlo Park, CA, USA
+  uri: http://www-conf.slac.stanford.edu/xldb2016/
+
+- date: 2015
+  place: Stanford University, CA, USA
+  uri: http://www-conf.slac.stanford.edu/xldb2015/
+
+- date: 2013
+  place: Stanford University, CA, USA
+  uri: https://conf-slac.stanford.edu/xldb-2013
+
+- date: 2013 Satellite workshop
+  place: CERN
+  uri: https://indico.cern.ch/event/222554
+
+- date: 2012
+  place: Stanford University, CA, USA
+  uri: http://www-conf.slac.stanford.edu/xldb2012/
+
+- date: 2011
+  place: SLAC, Menlo Park, CA, USA
+  uri: http://www-conf.slac.stanford.edu/xldb2011/
+
+- date: 2010
+  place: SLAC, Menlo Park, CA, USA
+  uri: http://www-conf.slac.stanford.edu/xldb2010/
+
+- date: 2009
+  place: Lyon, France
+  uri: http://www-conf.slac.stanford.edu/xldb2009/
+
+- date: 2008
+  place: SLAC, Menlo Park, CA, USA
+  uri: http://www-conf.slac.stanford.edu/xldb2008/
+
+- date: 2007
+  place: SLAC, Menlo Park, CA, USA
+  uri: http://www-conf.slac.stanford.edu/xldb2007/
+

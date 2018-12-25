@@ -1,0 +1,32 @@
+{# vi:ft=jinja: #}
+{# Macro pour la navigation #}
+{%- macro navigation(nav, pages) -%}
+<ul>
+{%for entry in nav%}
+<li>
+{%-if entry.page-%}
+    <a href="{{pages[entry.page]|url}}">{{entry.name}}</a>
+{%-else-%}
+    <h2>{{entry.name}}</h2>
+{%-endif-%}
+{%-if entry.children-%}
+{{navigation(entry.children, pages)}}
+{%-endif-%}
+</li>
+{%-endfor%}
+</ul>
+{%-endmacro-%}
+{%-macro skipbar(id, pages, prev, next)-%}
+<nav role="navigation" id="{{id}}">{# ⇫ #}
+    <a id="top" title="Top" href="#header">▲</a>
+    {%-if prev-%}
+    <a rel="prev" title="Page précédente" href="{{prev|url}}">❮</a>
+    {%-endif-%}
+    {%-if next-%}
+    <a rel="next" title="Page suivante" href="{{next|url}}">❯</a>
+    {%-endif-%}
+    {#<a rel="start" title="Page d’accueil" href="{{pages.home}}">⌂</a>#}
+    <a id="info" title="Informations" href="#infobar">i</a>
+    <a rel="toc" title="Navigation" href="#nav">≡</a>
+</nav>
+{%-endmacro-%}

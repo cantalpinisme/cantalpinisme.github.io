@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
+    <title type="text">{{site.title}} News</title>
+  <link href="{{pages.news}}" rel="alternate" type="text/html"
+      title="{{site.title}} News"/>
+  <updated>{{now}}</updated>
+  {%-if news-%}
+    {%for n in news-%}
+      <entry>
+        <title>{{n.title}}</title>
+        <updated>{{n.date}}</updated>
+        <content type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            {{n.content|mkd}}
+          </div>
+        </content> 
+      </entry>
+    {%-endfor%}
+  {%-endif-%}
+</feed>

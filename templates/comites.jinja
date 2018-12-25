@@ -1,0 +1,7 @@
+{%-macro comlisting(cat)-%}
+{%- for p in comites|sort(attribute="fname")-%}
+    {%-if cat in p.cats-%}
+    {{rdfa.vcard(p)}}
+    {%-endif-%}
+{%-endfor-%}
+{%-endmacro-%}

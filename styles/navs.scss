@@ -1,0 +1,79 @@
+/*=== Nav bars: skip on top and menu on bottom ===*/
+/*--- skip bar ---*/
+#skip {
+    @extend %menu;
+    z-index: 1100;
+    border-bottom: $menu-border;
+    text-align: right;
+    position: fixed;
+    width: 100%;
+    top: 0;
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+        padding: 0em;
+        margin: .2em 0;
+        width: 1.5em;
+        font-size: 200%;
+        vertical-align: middle;
+    }
+
+    #info {
+        font-weight: bold;
+    }
+
+    #top {
+        font-size: 180%;
+        float: left;
+    }
+
+    a[rel=next], a[rel=prev] {
+        font-size: 150%;
+    }
+}
+
+/*--- nav bar ---*/
+#nav {
+    @extend %menu;
+    @extend %content-block;
+    border-top: $menu-border;
+    padding-bottom: 1em;
+
+    h1 {
+        display: none;
+    }
+
+    h2 {
+        border-top: $menu-border;
+        padding: .5em;
+        margin-top: .5em;
+    }
+
+    li {
+        display: block;
+        vertical-align: middle;
+
+        ul {
+            border-bottom: $menu-border;
+            padding-left: 1em;
+        }
+    }
+
+    a {
+        display: block;
+        padding: .3em;
+        vertical-align: baseline;
+        text-decoration: none;
+        font-size: 150%;
+    
+        &:active, &:hover, &:focus {
+            background-color: $colors-background-medium;
+        }
+        &:after {
+            content: "❯";
+            padding: 0 .3em;
+        }
+    }
+}

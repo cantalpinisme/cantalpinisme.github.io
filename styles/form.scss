@@ -1,0 +1,60 @@
+
+#register {
+    margin: auto;
+    width: 100%;
+
+    fieldset {
+        margin: 1ex 0;
+        padding: 0;
+        display: block;
+    }
+
+    .infos {
+
+        label, input {
+            display: inline-block;
+            margin: .3ex 0;
+            padding: .5ex;
+        }
+
+        label {
+            text-align: right;
+            width: 33%;
+        }
+
+        input {
+            width: 55%;
+        }
+    }
+
+    .cat, .gala {
+        input {
+            margin: 0 1em;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            width: 100%;
+        }
+    }
+
+    .buttons {
+        text-align: center;
+    }
+}
+
+@media (min-width: 50em) and (orientation: landscape) {
+#register {
+    width: 90%;
+
+    .cat, .gala {
+        display: inline-block;
+        width: 48%;
+    }
+
+    .infos {
+        padding-right: 10%;
+    }
+}
+}

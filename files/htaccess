@@ -1,0 +1,10 @@
+Options +MultiViews
+DirectoryIndex index index.html
+DefaultType text/html
+AddType text/html;charset=utf-8 .html
+AddType text/calendar;charset=utf-8 .ics
+AddType application/atom+xml;charset=utf-8 .atom
+AddType text/csv .csv
+# ExpiresActive on
+# ExpiresDefault "access plus 1 day"
+# ExpiresByType image/* "access plus 1 week"

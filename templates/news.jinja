@@ -1,0 +1,16 @@
+{# vi:ft=jinja: #}
+{%-macro news(ns,max=False)-%}
+  {%if ns-%}
+    {%for n in ns|sort(attribute='date',reverse=True)|batch(max or ns|count)|first-%}
+      <article class="news">
+        <header>
+          <h1>{{n.title}}</h1>
+          <time datetime="{{n.date}}">{{n.date|date('%d %b')}}</time>
+        </header>
+        <section>
+          {{n.content|mkd}}
+        </section>
+      </article>
+    {%-endfor%}
+  {%-endif%}
+{%-endmacro-%}
