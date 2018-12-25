@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
+    <title type="text">Grand Parcours Cantalpinisme 2019 News</title>
+  <link href="./news.html" rel="alternate" type="text/html"
+      title="Grand Parcours Cantalpinisme 2019 News"/>
+  <updated>2018-12-25 11:58:20</updated><entry>
+        <title>Inscriptions ouvertes</title>
+        <updated>2019-01-23</updated>
+        <content type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>Incrivez vous <a href="http://cantalpinisme.eu/register.html">ICI</a>       </p>
+          </div>
+        </content> 
+      </entry><entry>
+        <title>Ouverture de Cantalpinisme!</title>
+        <updated>2019-03-09</updated>
+        <content type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>Rendez-vous à 8 heures au chalet des Galinottes au Lioran</p>
+          </div>
+        </content> 
+      </entry></feed>
